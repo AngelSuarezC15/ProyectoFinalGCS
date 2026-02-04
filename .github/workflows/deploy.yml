@@ -1,0 +1,21 @@
+name: CD - Deploy Application
+
+on:
+  workflow_run:
+    workflows:
+      - CI Backend - Node + MySQL
+      - CI Frontend - React (Vite)
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Deploy info
+        run: |
+          echo "Despliegue automático simulado"
+          echo "Frontend desplegado en Vercel"
+          echo "Backend desplegado en Render"
